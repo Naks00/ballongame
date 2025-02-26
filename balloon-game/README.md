@@ -67,10 +67,11 @@ The game was created for a university project with OOP and SOLID principles in m
 
 **Power-Up Effects**  
 
-| Power-Up |	Effect	| Duration |
-|----------|----------|----------|
-| Fuel	   | +20 fuel units	| Instant |
-| Shield	 | Invincibility	| 6 seconds |
+| Power-Up |	       Effect	        | Duration |
+|----------|------------------------|---------- |
+| Fuel	   | +20 fuel units	        | Instant   |
+| Shield	 | Invincibility	        | 6 seconds |
+| Stopwatch| Slow down obstacles		| 5 seconds |
 
 ## Code Structure
 
@@ -82,7 +83,8 @@ balloon-game/
 │   ├── bird.png           
 │   ├── cloud.png
 |   ├── fuel.png           
-│   └── shield.png           
+│   └── shield.png
+│   └── slowdown.png
 ├── core/                  
 │   ├── entity.py          # Base Entity class
 │   ├── game_managers.py   # ObstacleManager, PowerUpManager and CollisionManager
