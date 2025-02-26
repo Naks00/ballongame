@@ -13,7 +13,7 @@ February, 2025
 A 2D Pygame-based survival game where you control a hot air balloon, avoid obstacles, collect power-ups, and climb as high as possible!    
 The game was created for a university project with OOP and SOLID principles in mind, the task at hand: [task.md](https://github.com/antoniosimuncic/balloon-game/blob/main/documentation/task.md)  
 
-<img src="https://github.com/antoniosimuncic/balloon-game/blob/main/documentation/screenshot.png">  
+<img src="https://github.com/Naks00/balloon-game/blob/main/documentation/screenshot.png">  
 
 ---
 
