@@ -115,4 +115,4 @@ balloon-game/
 
 ## UML Diagram
 
-<img src="https://github.com/antoniosimuncic/balloon-game/blob/main/documentation/uml-diagram.png">
+<img src="balloon-game/documentation/uml-diagram.png">
