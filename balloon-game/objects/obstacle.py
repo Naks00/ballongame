@@ -51,15 +51,58 @@ class Obstacle(Entity):
 # ------------------------------------
 # Obstacle Subclasses
 # ------------------------------------
-class Bird(Obstacle):
-    """Fast-moving bird obstacle with horizontal bouncing behavior."""
+import pygame
+from core.entity import Entity
+from core.settings import GameSettings
+
+bird_img = pygame.image.load("./assets/bird.png")
+
+class Bird(Entity):
+    """Bird obstacle class."""
     def __init__(self, x, y):
-        # Birds have a faster horizontal speed.
-        super().__init__(x, y, bird_img, GameSettings.OBSTACLE_SPEED_BIRD, width=60, height=60)
+        width, height = 50, 50
+        super().__init__(x, y, width, height)
+        self.image = bird_img
+        self.speed_x = GameSettings.OBSTACLE_SPEED_BIRD
+        self.speed_y = GameSettings.OBSTACLE_SPEED
 
+    def update(self, dt):
+        """Update bird position based on game speed settings."""
+        self.y += self.speed_y * dt
+        self.x += self.speed_x * dt
 
-class Cloud(Obstacle):
-    """Slow-moving cloud obstacle with horizontal bouncing behavior."""
+        # Bounce off the edges of the screen
+        if self.x <= 0 or self.x + self.width >= GameSettings.SCREEN_WIDTH:
+            self.speed_x = -self.speed_x
+
+    def draw(self, surface):
+        """Draw bird on the screen."""
+        surface.blit(self.image, (self.x, self.y))
+
+import pygame
+from core.entity import Entity
+from core.settings import GameSettings
+
+cloud_img = pygame.image.load("./assets/cloud.png")
+
+class Cloud(Entity):
+    """Cloud obstacle class."""
     def __init__(self, x, y):
-        super().__init__(x, y, cloud_img, GameSettings.OBSTACLE_SPEED_CLOUD, width=120, height=80)
+        width, height = 100, 60
+        super().__init__(x, y, width, height)
+        self.image = cloud_img
+        self.speed_x = GameSettings.OBSTACLE_SPEED_CLOUD
+        self.speed_y = GameSettings.OBSTACLE_SPEED
 
+    def update(self, dt):
+        """Update cloud position based on game speed settings."""
+        self.y += self.speed_y * dt
+        self.x += self.speed_x * dt
+
+        # Bounce off the edges of the screen
+        if self.x <= 0 or self.x + self.width >= GameSettings.SCREEN_WIDTH:
+            self.speed_x = -self.speed_x
+
+    def draw(self, surface):
+        """Draw cloud on the screen."""
+        surface.blit(self.image, (self.x, self.y))
