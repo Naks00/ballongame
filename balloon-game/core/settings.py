@@ -21,6 +21,7 @@ class GameSettings:
         POWERUP_SPAWN_INTERVAL (int): Power-up spawn interval (milliseconds)
         SLOWDOWN_DURATION (int): Slowdown power-up duration (milliseconds)
         SLOWDOWN_OBSTACLE_SPEED (int): Obstacle speed when slowdown power-up is active
+        SLOWDOWN_ACTIVE (bool): Flag to indicate if slowdown is active
     """
     FPS = 60
     SCREEN_WIDTH = 1200
@@ -37,5 +38,5 @@ class GameSettings:
     SHIELD_DURATION = 6000       # milliseconds the shield lasts
     OBSTACLE_SPAWN_INTERVAL = 2000 # milliseconds
     POWERUP_SPAWN_INTERVAL = 7000  # milliseconds
-    SLOWDOWN_DURATION = 5000     # milliseconds the slowdown lasts
-    SLOWDOWN_OBSTACLE_SPEED = 100 # pixels per second when slowdown is active
+    SLOWDOWN_DURATION = 4000     # milliseconds the slowdown lasts
+    SLOWDOWN_ACTIVE = False      # Add this flag to track slowdown state

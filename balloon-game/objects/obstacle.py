@@ -1,12 +1,11 @@
 import pygame
 import random
+import os  # Ensure os is imported
 from core.entity import Entity
 from core.settings import GameSettings
 
-
-bird_img = pygame.image.load("./assets/bird.png")
-cloud_img = pygame.image.load("./assets/cloud.png")
-
+bird_img = pygame.image.load(os.path.join("assets", "bird.png"))
+cloud_img = pygame.image.load(os.path.join("assets", "cloud.png"))
 
 # ------------------------------------
 # Obstacle Base Class 
@@ -17,17 +16,18 @@ class Obstacle(Entity):
         super().__init__(x, y, width, height)
         self.speed = speed  # horizontal speed component
         self.image = image
+        if GameSettings.SLOWDOWN_ACTIVE:
+            self.speed /= 2  # Apply slowdown effect if active
 
     def update(self, dt):
         """Update obstacle position including:
         - Horizontal movement with screen boundary bouncing
         - Vertical scrolling with background speed
         """
-
         # Horizontal movement.
         self.x += self.speed * dt
         # Vertical movement (scrolling down to simulate ascent).
-        self.y += GameSettings.BACKGROUND_SPEED * dt
+        self.y += GameSettings.OBSTACLE_SPEED * dt  # Use GameSettings.OBSTACLE_SPEED
 
         # Bounce off horizontal screen boundaries.
         if self.x <= 0:
@@ -43,8 +43,6 @@ class Obstacle(Entity):
         Args:
             surface (pygame.Surface): Game display surface
         """
-        
-        #pygame.draw.rect(surface, self.color, (self.x, self.y, self.width, self.height))
         surface.blit(self.image, (self.x, self.y))
 
 
@@ -55,7 +53,7 @@ import pygame
 from core.entity import Entity
 from core.settings import GameSettings
 
-bird_img = pygame.image.load("./assets/bird.png")
+bird_img = pygame.image.load(os.path.join("assets", "bird.png"))
 
 class Bird(Entity):
     """Bird obstacle class."""
@@ -65,6 +63,9 @@ class Bird(Entity):
         self.image = bird_img
         self.speed_x = GameSettings.OBSTACLE_SPEED_BIRD
         self.speed_y = GameSettings.OBSTACLE_SPEED
+        if GameSettings.SLOWDOWN_ACTIVE:
+            self.speed_x /= 2  # Apply slowdown effect if active
+            self.speed_y /= 2  # Apply slowdown effect if active
 
     def update(self, dt):
         """Update bird position based on game speed settings."""
@@ -83,7 +84,7 @@ import pygame
 from core.entity import Entity
 from core.settings import GameSettings
 
-cloud_img = pygame.image.load("./assets/cloud.png")
+cloud_img = pygame.image.load(os.path.join("assets", "cloud.png"))
 
 class Cloud(Entity):
     """Cloud obstacle class."""
@@ -93,6 +94,9 @@ class Cloud(Entity):
         self.image = cloud_img
         self.speed_x = GameSettings.OBSTACLE_SPEED_CLOUD
         self.speed_y = GameSettings.OBSTACLE_SPEED
+        if GameSettings.SLOWDOWN_ACTIVE:
+            self.speed_x /= 2  # Apply slowdown effect if active
+            self.speed_y /= 2  # Apply slowdown effect if active
 
     def update(self, dt):
         """Update cloud position based on game speed settings."""

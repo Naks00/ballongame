@@ -1,8 +1,11 @@
 import pygame
 import random
 import sys
-import os
+import os  # Ensure os is imported
 from pygame.locals import *
+
+# Set the working directory to the script's directory
+os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 from core.settings import GameSettings
 from core.entity import Entity
@@ -24,6 +27,7 @@ class GameLoop:
         self.screen = pygame.display.set_mode((GameSettings.SCREEN_WIDTH, GameSettings.SCREEN_HEIGHT))
         self.clock = pygame.time.Clock()
         self.font = pygame.font.SysFont(None, 24)
+        self.slowdown_font = pygame.font.SysFont(None, 48)  # Font for slowdown text
         pygame.display.set_caption("Balloon Game")
 
         self.balloon = Balloon()
@@ -98,6 +102,7 @@ class GameLoop:
         self.powerup_manager.draw(self.screen)
 
         self.draw_hud()
+        self.draw_slowdown_text()  # Draw slowdown text if active
 
         pygame.display.flip()
 
@@ -111,6 +116,13 @@ class GameLoop:
         self.screen.blit(best_text, (10, 30))
         self.screen.blit(fuel_text, (10, 50))
         self.screen.blit(shield_text, (10, 70))
+
+    def draw_slowdown_text(self):
+        """Draw the slowdown text in the middle of the screen if slowdown is active."""
+        if self.balloon.slowdown_active:
+            slowdown_text = self.slowdown_font.render(f"Slow Motion: {int(self.balloon.slowdown_timer / 1000)}s", True, (255, 0, 0))
+            text_rect = slowdown_text.get_rect(center=(GameSettings.SCREEN_WIDTH // 2, GameSettings.SCREEN_HEIGHT // 2))
+            self.screen.blit(slowdown_text, text_rect)
 
     def run(self):
         """Execute main game loop with fixed FPS timing."""

@@ -104,6 +104,7 @@ class CollisionManager:
         self.balloon = balloon
         self.obstacle_manager = obstacle_manager
         self.powerup_manager = powerup_manager
+        self.balloon.obstacle_manager = obstacle_manager  # Pass obstacle_manager to balloon
 
     def check_collisions(self):
         """Check and handle all collisions between:

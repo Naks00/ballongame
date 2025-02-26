@@ -1,10 +1,11 @@
 import pygame
+import os  # Ensure os is imported
 from core.entity import Entity
 from core.settings import GameSettings
 
-fuel_img = pygame.image.load("./assets/fuel.png")
-shield_img = pygame.image.load("./assets/shield.png")
-slowdown_img = pygame.image.load("./assets/slowdown.png")  # Add the image for the slowdown power-up
+fuel_img = pygame.image.load(os.path.join("assets", "fuel.png"))
+shield_img = pygame.image.load(os.path.join("assets", "shield.png"))
+slowdown_img = pygame.image.load(os.path.join("assets", "slowdown.png"))
 
 # ------------------------------------
 # Power Up Base Class
@@ -86,5 +87,12 @@ class SlowdownPowerUp(PowerUp):
         """
         balloon.slowdown_active = True
         balloon.slowdown_timer = GameSettings.SLOWDOWN_DURATION
-        GameSettings.OBSTACLE_SPEED = GameSettings.SLOWDOWN_OBSTACLE_SPEED
+        GameSettings.SLOWDOWN_ACTIVE = True  # Set the global slowdown flag
+        for obstacle in balloon.obstacle_manager.obstacles:
+            if hasattr(obstacle, 'speed_x'):
+                obstacle.speed_x /= 2  # Halve the horizontal speed of each obstacle
+            if hasattr(obstacle, 'speed_y'):
+                obstacle.speed_y /= 2  # Halve the vertical speed of each obstacle
+            if hasattr(obstacle, 'speed'):
+                obstacle.speed /= 2  # Halve the speed of each obstacle
         print("Obstacles slowed down for {} ms!".format(GameSettings.SLOWDOWN_DURATION))

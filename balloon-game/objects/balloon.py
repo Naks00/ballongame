@@ -1,9 +1,10 @@
 import pygame
+import os  # Ensure os is imported
 from core.entity import Entity
 from core.settings import GameSettings
 
-balloon_img = pygame.image.load("./assets/balloon.png")
-balloon_shield_img = pygame.image.load("./assets/balloon-shield.png")
+balloon_img = pygame.image.load(os.path.join("assets", "balloon.png"))
+balloon_shield_img = pygame.image.load(os.path.join("assets", "balloon-shield.png"))
 
 class Balloon(Entity):
     """Player-controlled hot air balloon entity with fuel management and power-up capabilities."""
@@ -45,7 +46,14 @@ class Balloon(Entity):
             self.slowdown_timer -= dt * 1000
             if self.slowdown_timer <= 0:
                 self.slowdown_active = False
-                GameSettings.OBSTACLE_SPEED = GameSettings.DEFAULT_OBSTACLE_SPEED
+                GameSettings.SLOWDOWN_ACTIVE = False  # Reset the global slowdown flag
+                for obstacle in self.obstacle_manager.obstacles:
+                    if hasattr(obstacle, 'speed_x'):
+                        obstacle.speed_x *= 2  # Reset the horizontal speed of each obstacle
+                    if hasattr(obstacle, 'speed_y'):
+                        obstacle.speed_y *= 2  # Reset the vertical speed of each obstacle
+                    if hasattr(obstacle, 'speed'):
+                        obstacle.speed *= 2  # Reset the speed of each obstacle
 
         if self.x < 0:
             self.x = 0
