@@ -21,7 +21,8 @@ The game was created for a university project with OOP and SOLID principles in m
 - **Fuel Management**: Keep your balloon airborne by managing depleting fuel.  
 - **Power-Ups**:  
   - ⛽ **Fuel Canisters**: Refill your fuel tank.  
-  - 🛡️ **Shields**: Temporarily avoid crash damage.  
+  - 🛡️ **Shields**: Temporarily avoid crash damage.
+  - ⏱️ **Stopwatch**: Slow down obstacles for a limited time.  
 - **Obstacles**:  
   - 🐦 **Birds**: Fast-moving horizontal threats.  
   - ☁️ **Clouds**: Slow-moving obstacles.  
@@ -43,7 +44,7 @@ The game was created for a university project with OOP and SOLID principles in m
 2. **Clone the Repository:**
    
     ```bash
-    git clone https://github.com/antoniosimuncic/balloon-game.git
+    git clone https://github.com/Naks00/balloon-game.git
     cd balloon-game
     ```
 3. **Run the Game:**
